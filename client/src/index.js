@@ -4,9 +4,8 @@ import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 //React Components
 import App from './components/App';
 
-
 const client = new ApolloClient({
-  uri: 'http://localhost:4000',
+  uri: 'http://192.168.1.54:4000',
   cache: new InMemoryCache()
 });
 

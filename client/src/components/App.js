@@ -3,9 +3,8 @@ import { useQuery } from "@apollo/client";
 // Components
 import Question from "./Question"
 // Material UI
-import { Container } from "@material-ui/core";
 import { ThemeProvider, makeStyles } from "@material-ui/styles";
-import { CssBaseline, createMuiTheme, IconButton, AppBar, Toolbar, Drawer } from "@material-ui/core";
+import { Container, Divider, CssBaseline, createMuiTheme, IconButton, AppBar, Toolbar, SwipeableDrawer } from "@material-ui/core";
 import { cyan } from "@material-ui/core/colors";
 import { Brightness2Rounded, Brightness4Rounded, MenuRounded, CloseRounded } from "@material-ui/icons";
 // Querys
@@ -71,13 +70,14 @@ const App = () => {
         </IconButton>
       </Toolbar>
     </AppBar>
-    <Drawer anchor="left" open={openMenu} onClose={toggleDrawer(false)}>
+    <SwipeableDrawer anchor="left" open={openMenu} onClose={toggleDrawer(false)}>
       <IconButton
         color="inherit"
         onClick={() => toggleOpenMenu(false)}>
         <CloseRounded />
       </IconButton>
-    </Drawer>
+      <Divider style={{ margin: 8 }} />
+    </SwipeableDrawer>
     <Container maxWidth="md">{questions.map(question => <Question key={`${question.id}-question-item`} question={question} />)}</Container>
   </ThemeProvider >;
 };

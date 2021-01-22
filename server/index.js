@@ -7,9 +7,14 @@ const resolvers = [QuestionResolver, CategorienResolver];
 //Schemas
 const typeDefs = require("./schemas");
 
-mongoose.connect("mongodb://localhost/test");
+//Secrets only local
+const secrets = require("./secrets");
+const bddUsername = process.env.MongoUser != null ? process.env.MongoUser : secrets.bddUsername;
+const bddpassword = process.env.MongoPassword != null ? process.env.MongoPassword : secrets.bddpassword;
+
+mongoose.connect(`mongodb+srv://${bddUsername}:${bddpassword}>@masterquizz.4dkdx.mongodb.net/<dbname>?retryWrites=true&w=majority`);
 
 const server = new GraphQLServer({ typeDefs, resolvers });
 mongoose.connection.once("open", () => {
-  server.start(() => console.log('Server is running on http://localhost:4000'));
+    server.start(() => console.log('Server is running on http://localhost:4000'));
 });
