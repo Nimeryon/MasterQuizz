@@ -1,13 +1,24 @@
-import React, { Component, } from "react";
+import React, { Component } from "react";
 // Material UI
-import { Divider, Paper, Box, Typography, Grid, Button } from "@material-ui/core";
+import { Divider, Paper, Box, Typography, Grid, Button, withStyles } from "@material-ui/core";
+import { green, red } from "@material-ui/core/colors";
 // Components
-import Question from "./Question";
 import Result from "./Result";
+
+const styles = (theme) => ({
+    red: {
+        color: red[500]
+    },
+    green: {
+        color: green[500]
+    }
+});
 
 class Questions extends Component {
     state = {
         question: 0,
+        transition: false,
+        correct: true,
         score: 0,
         end: false
     };
@@ -15,13 +26,22 @@ class Questions extends Component {
     handleClick(answer) {
         if (answer == this.props.questions[this.state.question].correct) {
             this.addScore();
-        }
-        if (this.state.question + 1 > this.props.questions.length - 1) {
-            this.setState({ end: true });
+            this.setState({ correct: true });
         }
         else {
-            this.setState({ question: this.state.question + 1 });
+            this.setState({ correct: false });
         }
+        this.setState({ transition: true });
+
+        setTimeout(() => {
+            if (this.state.question + 1 > this.props.questions.length - 1) {
+                this.setState({ end: true });
+            }
+            else {
+                this.setState({ question: this.state.question + 1 });
+            }
+            this.setState({ transition: false });
+        }, 1000);
     }
 
     addScore() {
@@ -29,6 +49,7 @@ class Questions extends Component {
     }
 
     render() {
+        const { classes } = this.props;
         return <React.Fragment>{
             this.state.end == false
                 ? <Paper key={`${this.props.questions[this.state.question].id}-question-item`} elevation={1} style={{ margin: 8 }}>
@@ -37,12 +58,13 @@ class Questions extends Component {
                         <Divider style={{ margin: 8 }} />
                         <Grid container spacing={1}>{this.props.questions[this.state.question].answers.map(answer =>
                             <Grid key={`${this.props.questions[this.state.question].id}-${answer}`} item xs={6}>
-                                <Button fullWidth variant="outlined" color="default" onClick={() => {
+                                <Button fullWidth variant="outlined" className={this.state.transition ? answer == this.props.questions[this.state.question].correct ? classes.green : classes.red : ""} color={this.state.transition ? "inherit" : "default"} onClick={() => {
                                     this.handleClick(answer)
                                 }}>
                                     <Typography variant="h6">{answer}</Typography>
                                 </Button>
-                            </Grid>)}
+                            </Grid>
+                        )}
                         </Grid>
                     </Box>
                 </Paper >
@@ -51,4 +73,4 @@ class Questions extends Component {
     }
 }
 
-export default Questions;
+export default withStyles(styles, { withTheme: true })(Questions);
