@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useQuery } from "@apollo/client";
 // Components
-import Question from "./Question";
+import Questions from "./Questions";
 // Material UI
 import { ThemeProvider, makeStyles } from "@material-ui/styles";
 import { Container, Divider, CssBaseline, createMuiTheme, IconButton, AppBar, Toolbar, SwipeableDrawer } from "@material-ui/core";
@@ -52,7 +52,6 @@ const App = () => {
   if (loading) return null;
   if (error) console.log(error);
   const { questions } = data;
-  console.log(data);
 
   return <ThemeProvider theme={appliedTheme}>
     <CssBaseline />
@@ -79,7 +78,9 @@ const App = () => {
       </IconButton>
       <Divider style={{ margin: 8 }} />
     </SwipeableDrawer>
-    <Container maxWidth="md">{questions.map(question => <Question key={`${question.id}-question-item`} question={question} />)}</Container>
+    {questions != null &&
+      <Container maxWidth="md"><Questions questions={questions} /></Container>
+    }
   </ThemeProvider >;
 };
 
