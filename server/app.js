@@ -1,4 +1,6 @@
 require('dotenv').config();
+//Path
+const path = require("path");
 //Express
 const express = require('express');
 let app = express();
@@ -25,8 +27,8 @@ app.use(
         graphiql: true,
     })
 );
-app.get('/', (req, res) => {
-    res.sendFile('index.html');
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, '../public', 'index.html'));
 });
 
 mongoose

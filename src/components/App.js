@@ -1,7 +1,10 @@
 import React, { useState } from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 // Components
 import Quizz from "./Quizz";
 import Navigation from "./Navigation";
+import Login from "./Login";
+import Register from "./Register";
 // Material UI
 import { ThemeProvider, makeStyles } from "@material-ui/styles";
 import { Container, Divider, CssBaseline, createMuiTheme, IconButton, SwipeableDrawer } from "@material-ui/core";
@@ -46,19 +49,23 @@ const App = () => {
   const appliedTheme = createMuiTheme(theme ? light : dark);
 
   return <ThemeProvider theme={appliedTheme}>
-    <CssBaseline />
-    <Navigation classes={classes} icon={icon} toggleOpenMenu={toggleOpenMenu} setTheme={setTheme} theme={theme} />
-    <SwipeableDrawer anchor="left" open={openMenu} onClose={toggleDrawer(false)}>
-      <IconButton
-        color="inherit"
-        onClick={() => toggleOpenMenu(false)}>
-        <CloseRounded />
-      </IconButton>
-      <Divider style={{ margin: 8 }} />
-    </SwipeableDrawer>
-    <Container maxWidth="md">
-      <Quizz />
-    </Container>
+    <Router>
+      <CssBaseline />
+      <Navigation classes={classes} icon={icon} toggleOpenMenu={toggleOpenMenu} setTheme={setTheme} theme={theme} />
+      <SwipeableDrawer anchor="left" open={openMenu} onClose={toggleDrawer(false)}>
+        <IconButton
+          color="inherit"
+          onClick={() => toggleOpenMenu(false)}>
+          <CloseRounded />
+        </IconButton>
+        <Divider style={{ margin: 8 }} />
+      </SwipeableDrawer>
+      <Switch>
+        <Route path="/" exact component={() => <Quizz />} />
+        <Route path="/login" exact component={() => <Login />} />
+        <Route path="/register" exact component={() => <Register />} />
+      </Switch>
+    </Router>
   </ThemeProvider >;
 };
 
