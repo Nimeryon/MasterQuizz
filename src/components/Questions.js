@@ -24,24 +24,26 @@ class Questions extends Component {
     };
 
     handleClick(answer) {
-        if (answer == this.props.questions[this.state.question].correct) {
-            this.addScore();
-            this.setState({ correct: true });
-        }
-        else {
-            this.setState({ correct: false });
-        }
-        this.setState({ transition: true });
-
-        setTimeout(() => {
-            if (this.state.question + 1 > this.props.questions.length - 1) {
-                this.setState({ end: true });
+        if (!this.state.transition) {
+            if (answer == this.props.questions[this.state.question].correct) {
+                this.addScore();
+                this.setState({ correct: true });
             }
             else {
-                this.setState({ question: this.state.question + 1 });
+                this.setState({ correct: false });
             }
-            this.setState({ transition: false });
-        }, 1000);
+            this.setState({ transition: true });
+
+            setTimeout(() => {
+                if (this.state.question + 1 > this.props.questions.length - 1) {
+                    this.setState({ end: true });
+                }
+                else {
+                    this.setState({ question: this.state.question + 1 });
+                }
+                this.setState({ transition: false });
+            }, 1000);
+        }
     }
 
     addScore() {
