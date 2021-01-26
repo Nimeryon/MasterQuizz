@@ -57,7 +57,7 @@ class Questions extends Component {
                         <Typography variant="h4">{this.props.questions[this.state.question].title}</Typography>
                         <Divider style={{ margin: 8 }} />
                         <Grid container spacing={1}>{this.props.questions[this.state.question].answers.map(answer =>
-                            <Grid key={`${this.props.questions[this.state.question].id}-${answer}`} item xs={6}>
+                            <Grid key={`${this.props.questions[this.state.question].id}-${answer}`} item xs={12} sm={6}>
                                 <Button fullWidth variant="outlined" className={this.state.transition ? answer == this.props.questions[this.state.question].correct ? classes.green : classes.red : ""} color={this.state.transition ? "inherit" : "default"} onClick={() => {
                                     this.handleClick(answer)
                                 }}>

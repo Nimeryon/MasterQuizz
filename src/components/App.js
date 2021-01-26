@@ -1,14 +1,12 @@
 import React, { useState } from "react";
-import { useQuery } from "@apollo/client";
 // Components
-import Questions from "./Questions";
+import Quizz from "./Quizz";
+import Navigation from "./Navigation";
 // Material UI
 import { ThemeProvider, makeStyles } from "@material-ui/styles";
-import { Container, Divider, CssBaseline, createMuiTheme, IconButton, AppBar, Toolbar, SwipeableDrawer } from "@material-ui/core";
+import { Container, Divider, CssBaseline, createMuiTheme, IconButton, SwipeableDrawer } from "@material-ui/core";
 import { cyan } from "@material-ui/core/colors";
-import { Brightness2Rounded, Brightness4Rounded, MenuRounded, CloseRounded } from "@material-ui/icons";
-// Querys
-import QuestionsQuery from "../querys/QuestionQuery";
+import { Brightness2Rounded, Brightness4Rounded, CloseRounded } from "@material-ui/icons";
 
 const dark = createMuiTheme({
   palette: {
@@ -47,29 +45,9 @@ const App = () => {
   const icon = !theme ? <Brightness4Rounded /> : <Brightness2Rounded />;
   const appliedTheme = createMuiTheme(theme ? light : dark);
 
-  const { data, loading, error } = useQuery(QuestionsQuery);
-
-  if (loading) return null;
-  if (error) console.log(error);
-  const { questions } = data;
-
   return <ThemeProvider theme={appliedTheme}>
     <CssBaseline />
-    <AppBar position="static">
-      <Toolbar className={classes.root}>
-        <IconButton
-          color="inherit"
-          onClick={() => toggleOpenMenu(true)}>
-          <MenuRounded />
-        </IconButton>
-        <IconButton
-          color="inherit"
-          onClick={() => setTheme(!theme)}
-        >
-          {icon}
-        </IconButton>
-      </Toolbar>
-    </AppBar>
+    <Navigation classes={classes} icon={icon} toggleOpenMenu={toggleOpenMenu} setTheme={setTheme} />
     <SwipeableDrawer anchor="left" open={openMenu} onClose={toggleDrawer(false)}>
       <IconButton
         color="inherit"
@@ -78,9 +56,9 @@ const App = () => {
       </IconButton>
       <Divider style={{ margin: 8 }} />
     </SwipeableDrawer>
-    {questions != null &&
-      <Container maxWidth="md"><Questions questions={questions} /></Container>
-    }
+    <Container maxWidth="md">
+      <Quizz />
+    </Container>
   </ThemeProvider >;
 };
 
