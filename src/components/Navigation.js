@@ -5,7 +5,7 @@ import { MenuRounded } from "@material-ui/icons";
 
 class Navigation extends Component {
     render() {
-        <AppBar position="static">
+        return <AppBar position="static">
             <Toolbar className={this.props.classes.root}>
                 <IconButton
                     color="inherit"
@@ -14,7 +14,7 @@ class Navigation extends Component {
                 </IconButton>
                 <IconButton
                     color="inherit"
-                    onClick={() => this.props.setTheme(!theme)}
+                    onClick={() => this.props.setTheme(!this.props.theme)}
                 >
                     {this.props.icon}
                 </IconButton>

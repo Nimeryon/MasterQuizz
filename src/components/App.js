@@ -47,7 +47,7 @@ const App = () => {
 
   return <ThemeProvider theme={appliedTheme}>
     <CssBaseline />
-    <Navigation classes={classes} icon={icon} toggleOpenMenu={toggleOpenMenu} setTheme={setTheme} />
+    <Navigation classes={classes} icon={icon} toggleOpenMenu={toggleOpenMenu} setTheme={setTheme} theme={theme} />
     <SwipeableDrawer anchor="left" open={openMenu} onClose={toggleDrawer(false)}>
       <IconButton
         color="inherit"
