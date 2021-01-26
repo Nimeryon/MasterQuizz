@@ -1,25 +1,44 @@
 import React, { Component } from "react";
 // Material-ui
-import { Paper, Grid, Button, Typography, Divider, Box, Container } from '@material-ui/core';
+import { Paper, Grid, Button, Typography, Divider, Box, Container, withStyles } from '@material-ui/core';
 import { PersonRounded, LockRounded } from "@material-ui/icons";
 // Components
 import InputForm from "./InputForm";
 
+const styles = (theme) => ({
+    m: {
+        margin: 8
+    },
+    mxl: {
+        marginTop: 16,
+        marginBottom: 16
+    },
+    m_left: {
+        margin: 8,
+        marginLeft: 0
+    },
+    p: {
+        padding: 16,
+        margin: 8
+    }
+});
+
 class Login extends Component {
     render() {
+        const { classes } = this.props;
         return <Container maxWidth="sm">
-            <Paper elevation={1} style={{ margin: 8 }}>
+            <Paper elevation={1} className={classes.p} >
                 <form>
                     <Box display="flex" alignItems="center" justifyContent="center">
                         <Typography variant="h4">Connexion</Typography>
                     </Box>
                     <Grid container spacing={1}>
-                        <InputForm icon={<PersonRounded style={{ margin: 8 }} />} width={12} emptyText={"Pseudo"} auto={"username"} />
-                        <InputForm icon={<LockRounded style={{ margin: 8 }} />} type={"password"} width={12} emptyText={"Password"} auto={"current-password"} />
+                        <InputForm icon={<PersonRounded className={classes.m_left} />} width={12} emptyText={"Pseudo"} auto={"username"} />
+                        <InputForm icon={<LockRounded className={classes.m_left} />} type={"password"} width={12} emptyText={"Password"} auto={"current-password"} />
                     </Grid>
-                    <Divider style={{ margin: 8 }} />
+                    <Divider className={classes.mxl} />
                     <Box display="flex" alignItems="center" justifyContent="center">
-                        <Button style={{ margin: 8 }} variant="outlined" color="primary">Go</Button>
+                        <Button variant="outlined" color="primary">Go</Button>
                     </Box>
                 </form>
             </Paper >
@@ -27,4 +46,4 @@ class Login extends Component {
     }
 }
 
-export default Login;
+export default withStyles(styles, { withTheme: true })(Login);

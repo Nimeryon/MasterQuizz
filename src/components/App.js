@@ -7,7 +7,7 @@ import Login from "./Login";
 import Register from "./Register";
 // Material UI
 import { ThemeProvider, makeStyles } from "@material-ui/styles";
-import { Divider, CssBaseline, createMuiTheme, IconButton, SwipeableDrawer } from "@material-ui/core";
+import { Divider, CssBaseline, createMuiTheme, IconButton, SwipeableDrawer, Box } from "@material-ui/core";
 import { cyan } from "@material-ui/core/colors";
 import { Brightness2Rounded, Brightness4Rounded, CloseRounded } from "@material-ui/icons";
 

@@ -11,6 +11,12 @@ const styles = (theme) => ({
     },
     green: {
         color: green[500]
+    },
+    m: {
+        margin: 8
+    },
+    p: {
+        padding: 8
     }
 });
 
@@ -54,10 +60,10 @@ class Questions extends Component {
         const { classes } = this.props;
         return <Container maxWidth="md">{
             this.state.end == false
-                ? <Paper key={`${this.props.questions[this.state.question].id}-question-item`} elevation={1} style={{ margin: 8 }}>
+                ? <Paper key={`${this.props.questions[this.state.question].id}-question-item`} elevation={1} className={classes.m}>
                     <Box style={{ padding: 8 }} display="flex" flexDirection="column" justifyContent="space-around" flexWrap="wrap">
                         <Typography variant="h4">{this.props.questions[this.state.question].title}</Typography>
-                        <Divider style={{ margin: 8 }} />
+                        <Divider className={classes.m} />
                         <Grid container spacing={1}>{this.props.questions[this.state.question].answers.map(answer =>
                             <Grid key={`${this.props.questions[this.state.question].id}-${answer}`} item xs={12} sm={12} md={6}>
                                 <Button fullWidth variant="outlined" className={this.state.transition ? answer == this.props.questions[this.state.question].correct ? classes.green : classes.red : ""} color={this.state.transition ? "inherit" : "default"} onClick={() => {
