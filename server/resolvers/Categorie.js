@@ -6,22 +6,44 @@ const CategorieSchema = new Schema({
 const Categorie = mongoose.model("Categorie", CategorieSchema);
 
 const CategorieResolver = {
-    categorie: async (_, { id }) => {
-        return Categorie.findById(id);
+    categorie: async ({ id }) => {
+        try {
+            return Categorie.findById(id);
+        } catch (error) {
+            throw error;
+        }
     },
-    categories: () => Categorie.find(),
-    createCategorie: async (_, { title }) => {
-        const categorie = new Categorie({ title });
-        await categorie.save();
-        return categorie;
+    categories: () => {
+        try {
+            return Categorie.find();
+        } catch (error) {
+            throw error;
+        }
     },
-    updateCategorie: async (_, { id, title }) => {
-        await Categorie.findByIdAndUpdate(id, { title });
-        return true;
+    createCategorie: async ({ title }) => {
+        try {
+            const categorie = new Categorie({ title });
+            await categorie.save();
+            return categorie;
+        } catch (error) {
+            throw error;
+        }
     },
-    deleteCategorie: async (_, { id }) => {
-        await Categorie.findByIdAndRemove(id);
-        return true;
+    updateCategorie: async ({ id, title }) => {
+        try {
+            await Categorie.findByIdAndUpdate(id, { title });
+            return true;
+        } catch (error) {
+            throw error;
+        }
+    },
+    deleteCategorie: async ({ id }) => {
+        try {
+            await Categorie.findByIdAndRemove(id);
+            return true;
+        } catch (error) {
+            throw error;
+        }
     }
 };
 
