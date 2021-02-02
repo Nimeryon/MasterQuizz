@@ -3,7 +3,6 @@ require('dotenv').config();
 const path = require("path");
 //Express
 const express = require('express');
-const helmet = require('helmet');
 let app = express();
 //Mongoose
 const { graphqlHTTP } = require("express-graphql");
@@ -19,9 +18,6 @@ const uri = `mongodb+srv://${process.env.MongoUser}:${process.env.MongoPassword}
 const options = { useNewUrlParser: true, useUnifiedTopology: true };
 let port = process.env.PORT || 3000;
 
-// utilisation de helmet et désactivation de l'entête signifiant l'utilisation d'express
-app.use(helmet());
-app.disable("x-powered-by");
 app.use(express.static(__dirname + '/../public'));
 app.use(
     "/api",

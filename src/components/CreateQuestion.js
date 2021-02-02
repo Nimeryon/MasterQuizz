@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-// Route
-import { Redirect } from "react-router-dom";
 // Material-ui
 import { Paper, Grid, Button, Typography, CircularProgress, Divider, Box, Container, Slider, MenuItem, TextField, makeStyles } from '@material-ui/core';
 import InputForm from "./InputForm";
