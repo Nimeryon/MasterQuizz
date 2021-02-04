@@ -35,12 +35,11 @@ sudo rm sites-enabled/default
 ```
 - Création des certificats ssl permettant la mise en place du https : 
 ```
-sudo cd /etc/pki/tls
 sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/pki/tls/private/cert.key -out /etc/pki/tls/certs/cert.crt
 ```
-- Créer la configuration du serveur nginx : 
+- Modifier la configuration du serveur nginx : 
 ```
-sudo touch sites-available/masterquizz.conf
+sudo vi nginx.conf
 ```
 - Ouvrir le fichier de configuration avec votre éditeur préférée et y coller le code suivant en remplaçant les cases [IP local] par votre ip local, fonctionne aussi avec localhost : 
 ```
@@ -83,10 +82,6 @@ server {
     }
 }
 ```
-- Créer un lien symbolique de la configuration dans sites-enabled : 
-```
-sudo ln sites-available/masterquizz.conf sites-enabled/
-```
 - Tester la configuration du fichier : 
 ```
 sudo nginx -t
@@ -102,7 +97,7 @@ sudo systemctl restart nginx
 bash <(curl -Ss https://my-netdata.io/kickstart.sh) --stable-channel
 cd /etc/netdata
 ```
-- Créer et éditer le fichier python.d/nginx.conf avec vi, vim ou nano (au choix ^^)
+- Créer et éditer le fichier python.d/nginx.conf avec vi, vim ou nano (au choix)
 ```
 sudo vi python.d/nginx.conf
 ```
