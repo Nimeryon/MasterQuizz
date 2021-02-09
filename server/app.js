@@ -1,4 +1,4 @@
-require('dotenv').config();
+//require('dotenv').config();
 //Path
 const path = require("path");
 //Express
