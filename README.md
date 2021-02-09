@@ -3,6 +3,8 @@
 Bonjour, voici le projet MasterQuizz un site vous venez pour tester votre culture général. (WIP)
 Disponible sur https://masterquizz.fr/
 
+## Indicateur de backup :
+
 ---
 ## Installation pour CentOS7 : 
 ### Prérequis : 
@@ -16,10 +18,17 @@ sudo yum update
 - Installer les prérequis : 
 ```
 sudo yum install nginx -y
-sudo yum install nodejs -y
 sudo yum install npm -y
 sudo yum install curl -y
 sudo yum install ufw -y
+```
+
+- Installation de NodeJs :
+```
+curl -sL https://rpm.nodesource.com/setup_12.x | sudo bash -
+sudo yum clean all && sudo yum makecache fast
+sudo yum install -y gcc-c++ make
+sudo yum install -y nodejs
 ```
 
 ---
