@@ -14,6 +14,7 @@ const resolvers = { ...QuestionResolver, ...CategorieResolver };
 //Schemas
 const schema = require("./schemas");
 
+console.log("Non");
 const uri = `mongodb+srv://${process.env.MongoUser}:${process.env.MongoPassword}@masterquizz.4dkdx.mongodb.net/${process.env.MongoDb}?retryWrites=true&w=majority`;
 const options = { useNewUrlParser: true, useUnifiedTopology: true };
 let port = process.env.PORT || 3000;
